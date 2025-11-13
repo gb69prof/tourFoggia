@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Percorso Storico-Culturale – Foggia StartApp</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #0b1724;
+      color: #f5f5f5;
+      line-height: 1.5;
+    }
+
+    .page-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    header {
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      margin-bottom: 3px;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #c5cad9;
+    }
+
+    .map-container {
+      margin-top: 12px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    #map {
+      width: 100%;
+      height: 420px;
+    }
+
+    .legend {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 12px;
+      background: #101b2b;
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+    }
+
+    .legend-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .legend-list {
+      list-style: none;
+    }
+
+    .legend-item {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 4px;
+      align-items: center;
+    }
+
+    .legend-number {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #ffcc33;
+      color: #1a1a1a;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .legend-text {
+      color: #e1e6f5;
+    }
+
+    .note {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: #9ba2b6;
+    }
+
+    /* Stile popup Leaflet */
+    .leaflet-popup-content-wrapper {
+      background: #101b2b;
+      color: #f5f5f5;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .leaflet-popup-tip {
+      background: #101b2b;
+    }
+
+    .popup-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.92rem;
+    }
+
+    .popup-desc {
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      color: #d7ddf2;
+    }
+
+    .popup-btn {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #ffcc33;
+      background: transparent;
+      color: #ffcc33;
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <h1>Percorso storico-culturale – Foggia</h1>
+      <p class="subtitle">
+        Dal Neolitico dei Campi Diomedei ai Cappelloni delle Croci: un itinerario attraverso la memoria
+        storica e urbana della città.
+      </p>
+    </header>
+
+    <section class="map-container">
+      <div id="map"></div>
+    </section>
+
+    <section class="legend">
+      <div class="legend-title">Tappe del percorso (ordine cronologico)</div>
+      <ul class="legend-list">
+        <li class="legend-item">
+          <span class="legend-number">1</span>
+          <span class="legend-text">Campi Diomedei</span>
+        </li>
+        <li class="legend-item">
+          <span class="legend-number">2</span>
+          <span class="legend-text">Piazza del Lago</span>
+        </li>
+        <li class="legend-item">
+          <span class="legend-number">3</span>
+          <span class="legend-text">Chiesa di San Tommaso</span>
+        </li>
+        <li class="legend-item">
+          <span class="legend-number">4</span>
+          <span class="legend-text">Cattedrale</span>
+        </li>
+        <li class="legend-item">
+          <span class="legend-number">5</span>
+          <span class="legend-text">Ipogei federiciani</span>
+        </li>
+        <li class="legend-item">
+          <span class="legend-number">6</span>
+          <span class="legend-text">Via Arpi</span>
+        </li>
+        <li class="legend-item">
+          <span class="legend-number">7</span>
+          <span class="legend-text">Epitaffio</span>
+        </li>
+        <li class="legend-item">
+          <span class="legend-number">8</span>
+          <span class="legend-text">Cappelloni delle Croci</span>
+        </li>
+      </ul>
+      <p class="note">
+        Clicca sui punti per leggere una breve descrizione. Il pulsante
+        <strong>“Approfondisci”</strong> potrà portarti alle schede dettagliate su Google Sites.
+      </p>
+    </section>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <script>
+    // In futuro qui metteremo le URL delle tue pagine Google Sites per ogni tappa
+    const detailsUrl = {
+      1: "#", // Campi Diomedei
+      2: "#", // Piazza del Lago
+      3: "#", // Chiesa di San Tommaso
+      4: "#", // Cattedrale
+      5: "#", // Ipogei federiciani
+      6: "#", // Via Arpi
+      7: "#", // Epitaffio
+      8: "#"  // Cappelloni delle Croci
+    };
+
+    // Elenco delle tappe in ordine
+    const stops = [
+      {
+        number: 1,
+        name: "Campi Diomedei",
+        lat: 41.4579413,
+        lng: 15.5606328,
+        description: "Area archeologica che racconta le origini più antiche del territorio foggiano."
+      },
+      {
+        number: 2,
+        name: "Piazza del Lago",
+        lat: 41.4630022,
+        lng: 15.5443383,
+        description: "Uno degli spazi urbani simbolo della ricostruzione e della vita quotidiana della città."
+      },
+      {
+        number: 3,
+        name: "Chiesa di San Tommaso",
+        lat: 41.4632385,
+        lng: 15.541542,
+        description: "Antica chiesa del centro storico, legata alla stratificazione religiosa e civile della città."
+      },
+      {
+        number: 4,
+        name: "Cattedrale",
+        lat: 41.4635178,
+        lng: 15.5437617,
+        description: "Cuore religioso di Foggia, con la tradizione dell’Icona e la storia del culto mariano."
+      },
+      {
+        number: 5,
+        name: "Ipogei federiciani",
+        lat: 41.4643232,
+        lng: 15.5451936,
+        description: "Ambienti sotterranei che conservano memoria della Foggia medievale legata a Federico II."
+      },
+      {
+        number: 6,
+        name: "Via Arpi",
+        lat: 41.4636486,
+        lng: 15.5426623,
+        description: "Asse storico del centro antico, tra palazzi, chiese e tracce della città murata."
+      },
+      {
+        number: 7,
+        name: "Epitaffio",
+        lat: 41.46555,
+        lng: 15.5439962,
+        description: "Monumento che ricorda il passaggio dei pellegrini e le vie di collegamento del passato."
+      },
+      {
+        number: 8,
+        name: "Cappelloni delle Croci",
+        lat: 41.4664159,
+        lng: 15.5413507,
+        description: "Luogo della devozione popolare e delle processioni, legato alla memoria collettiva foggiana."
+      }
+    ];
+
+    // Centro approssimativo tra Campi Diomedei e il centro città
+    const mapCenter = [41.4625, 15.548];
+
+    // Inizializza la mappa
+    const map = L.map("map").setView(mapCenter, 14);
+
+    // Layer di base (OpenStreetMap)
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Icona numerica personalizzata
+    function createNumberIcon(number) {
+      return L.divIcon({
+        className: "number-icon",
+        html:
+          '<div style="width:26px;height:26px;border-radius:999px;background:#ffcc33;color:#1a1a1a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;border:2px solid #1a1a1a;">' +
+          number +
+          "</div>",
+        iconSize: [26, 26],
+        iconAnchor: [13, 26],
+        popupAnchor: [0, -24]
+      });
+    }
+
+    // Funzione per aprire la pagina di approfondimento
+    function openDetails(number) {
+      const url = detailsUrl[number] || "#";
+      if (url === "#") {
+        alert("La pagina di approfondimento per questa tappa sarà disponibile a breve.");
+      } else {
+        window.open(url, "_blank");
+      }
+    }
+
+    // Aggiungo i marker e raccolgo i punti per la polilinea
+    const routeLatLngs = [];
+
+    stops.forEach((stop) => {
+      const latLng = [stop.lat, stop.lng];
+      routeLatLngs.push(latLng);
+
+      const marker = L.marker(latLng, { icon: createNumberIcon(stop.number) }).addTo(map);
+
+      const popupHtml =
+        '<div class="popup-content">' +
+        '<div class="popup-title">' +
+        stop.number +
+        ". " +
+        stop.name +
+        "</div>" +
+        '<div class="popup-desc">' +
+        stop.description +
+        "</div>" +
+        '<button class="popup-btn" onclick="openDetails(' +
+        stop.number +
+        ')">Approfondisci</button>' +
+        "</div>";
+
+      marker.bindPopup(popupHtml);
+    });
+
+    // Disegno la linea che unisce i punti nell'ordine dato
+    const routeLine = L.polyline(routeLatLngs, {
+      color: "#ffcc33",
+      weight: 3,
+      opacity: 0.9
+    }).addTo(map);
+
+    // Adatto automaticamente lo zoom per includere tutte le tappe
+    map.fitBounds(routeLine.getBounds(), {
+      padding: [20, 20]
+    });
+  </script>
+</body>
+</html>
