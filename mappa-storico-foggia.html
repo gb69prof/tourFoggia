@@ -85,6 +85,10 @@
       align-items: center;
     }
 
+    .legend-item.clickable {
+      cursor: pointer;
+    }
+
     .legend-number {
       width: 20px;
       height: 20px;
@@ -163,7 +167,7 @@
     <section class="legend">
       <div class="legend-title">Tappe del percorso (ordine cronologico)</div>
       <ul class="legend-list">
-        <li class="legend-item">
+        <li class="legend-item clickable" onclick="openDetails(1)">
           <span class="legend-number">1</span>
           <span class="legend-text">Campi Diomedei</span>
         </li>
@@ -213,7 +217,7 @@
   <script>
     // In futuro qui metteremo le URL delle tue pagine Google Sites per ogni tappa
     const detailsUrl = {
-      1: "#", // Campi Diomedei
+      1: "https://sites.google.com/view/foggiastartapp/home-1/storico-culturale/campi-diomedei?authuser=1", // Campi Diomedei
       2: "#", // Piazza del Lago
       3: "#", // Chiesa di San Tommaso
       4: "#", // Cattedrale
