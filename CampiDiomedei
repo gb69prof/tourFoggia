@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campi Diomedei – Foggia StartApp</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #0b1724;
+      color: #f5f5f5;
+      line-height: 1.5;
+    }
+
+    .page-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    header {
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #c5cad9;
+    }
+
+    .content-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .column {
+      border-radius: 14px;
+      padding: 12px;
+      background: #101b2b;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .column-left {
+      flex: 1 1 260px;
+      min-width: 0;
+    }
+
+    .column-right {
+      flex: 1 1 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .column-left h2 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .column-left p {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: #e1e6f5;
+    }
+
+    .emoji-title {
+      margin-right: 4px;
+    }
+
+    .video-card {
+      background: #0c1522;
+      border-radius: 12px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    .video-title {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: #ffcc33;
+      font-weight: 600;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-note {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: #c5cad9;
+    }
+
+    @media (max-width: 720px) {
+      .content-layout {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <h1>Campi Diomedei – Foggia</h1>
+      <p class="subtitle">Parco urbano, archeologico e paesaggistico sorto sull'antico ippodromo: qui si cammina nel presente sopra una storia di 7.000 anni.</p>
+    </header>
+
+    <section class="content-layout">
+      <!-- Colonna sinistra: breve storia -->
+      <article class="column column-left">
+        <h2><span class="emoji-title">🏺</span>Cosa sono i Campi Diomedei</h2>
+        <p>I Campi Diomedei a Foggia non sono un antico sito storico con questo nome, ma un grande parco urbano e archeologico di recente realizzazione. È uno dei parchi urbani più grandi del Sud Italia (circa 23 ettari) ed è stato costruito sull'area dove un tempo sorgeva l'ex Ippodromo.</p>
+        <p>Il nome si ispira alla leggenda dell'eroe omerico Diomede, molto venerato in questa regione (la Daunia).</p>
+        <p><strong>🏛️ L'Importanza Archeologica</strong></p>
+        <p>L'aspetto più affascinante del parco è che sorge su un'area di straordinaria importanza storica. Durante i lavori sono stati fatti ritrovamenti che attestano la presenza di un vasto villaggio neolitico risalente a circa 7.000 anni fa (5.000 a.C.), uno dei più antichi insediamenti di agricoltori e allevatori della zona.</p>
+        <p>Il progetto del parco è stato concepito proprio per proteggere e, in futuro, valorizzare queste scoperte, integrandole con la fruizione pubblica.</p>
+        <p><strong>🌳 Cosa si può fare al parco</strong></p>
+        <p>Il parco è stato progressivamente aperto al pubblico (con una importante inaugurazione di nuove aree nell'aprile 2024) ed è pensato come un grande "polmone verde" per la città. Ecco le principali attività:</p>
+        <p><strong>Passeggiare e rilassarsi:</strong> è il luogo ideale per camminare, grazie ai suoi percorsi curvilinei e alle ampie aree verdi.</p>
+        <p><strong>Attività ricreative e sport:</strong> puoi correre, fare jogging o semplicemente goderti il tempo libero all'aperto.</p>
+        <p><strong>Aree gioco:</strong> il parco è attrezzato con spazi dedicati ai bambini, inclusi parchi giochi.</p>
+        <p><strong>Ammirare il verde:</strong> il progetto prevede la piantumazione di centinaia di alberi, rendendolo un luogo perfetto per staccare dalla città.</p>
+        <p><strong>Interesse culturale:</strong> sebbene l'area archeologica non sia (al momento) un museo a cielo aperto completamente visitabile come un sito tradizionale, si passeggia letteralmente "sopra" la storia. Il parco include anche aree didattiche e installazioni di land art (arte che utilizza il paesaggio stesso).</p>
+        <p>In sintesi, i Campi Diomedei sono il posto perfetto a Foggia per combinare una passeggiata rilassante nel verde con la consapevolezza di trovarsi in un luogo di profondo significato storico.</p>
+      </article>
+
+      <!-- Colonna destra: riquadri video YouTube -->
+      <aside class="column column-right">
+        <div class="video-card">
+          <div class="video-title">Presentazione dei Campi Diomedei</div>
+          <div class="video-frame">
+            <iframe 
+              src="https://www.youtube.com/embed/jQPxf3NOF0w" 
+              title="Presentazione Campi Diomedei" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <p class="video-note">Un breve video per entrare subito nell'atmosfera del nuovo grande parco urbano di Foggia.</p>
+        </div>
+
+        <div class="video-card">
+          <div class="video-title">Intervista a Siro, il primo foggiano</div>
+          <div class="video-frame">
+            <iframe 
+              src="https://www.youtube.com/embed/L2ZAAvXPlrs" 
+              title="Intervista a Siro" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <p class="video-note">Una testimonianza che unisce passato remoto e identità contemporanea: la voce di chi abita questi luoghi.</p>
+        </div>
+      </aside>
+    </section>
+  </div>
+</body>
+</html>
